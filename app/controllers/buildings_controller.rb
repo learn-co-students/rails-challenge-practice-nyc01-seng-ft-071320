@@ -6,8 +6,11 @@ class BuildingsController < ApplicationController
   end
 
   def update
-    @building = Building.create(building_params)
-    redirect_to building_path(@building)
+    if @building.update(building_params)
+      redirect_to building_path(@building)
+    else
+      render :edit
+    end
   end
 
   private

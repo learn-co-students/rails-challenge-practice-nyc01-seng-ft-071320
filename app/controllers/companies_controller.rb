@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
   def new
     @company = Company.new
+    @buildings = Building.all
   end
   
   def create
@@ -13,7 +14,7 @@ class CompaniesController < ApplicationController
       end
     end
 
-    if @company.save!
+    if @company.save
       redirect_to company_path(@company)
     else
       render :new
@@ -22,6 +23,7 @@ class CompaniesController < ApplicationController
 
   def show
     @company = Company.find(params[:id])
+    @employee = Employee.new
   end
 
   private

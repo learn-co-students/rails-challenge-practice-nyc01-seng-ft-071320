@@ -17,7 +17,11 @@
 </div>
 
 <div>
+  <p>Number of Employees in Total: <%= @building.num_of_employees %></p>
+</div>
+
+<div>
   <p>Rent in Total: <%= number_to_currency(@building.rent_in_total) %></p>
 </div>
 
-<%= link_to ">Edit details", edit_building_path(@building) %>
+<%= link_to "Edit details", edit_building_path(@building) %>

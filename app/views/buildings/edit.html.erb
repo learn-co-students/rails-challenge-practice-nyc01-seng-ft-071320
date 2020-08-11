@@ -1,4 +1,18 @@
 <h2>Edit Building</h2>
+<% if @building.errors.any? %>
+  <div id="error_explaination">
+    <h3>
+      <%= pluralize(@building.errors.count, 'error') %>
+      found:
+    </h3>
+    <ul>
+      <% @building.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div>
   <%= form_for @building do |f| %>
     <p><%= f.label :name %></p>

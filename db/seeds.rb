@@ -23,6 +23,8 @@ weworks.each do |we|
   Building.create(we)
 end
 
+puts "#{Building.all.count} buildings created"
+
 companies = [
   "Microsoft",
   "Flatiron",
@@ -37,6 +39,8 @@ companies.each do |company|
   Company.create(name: company)
 end
 
+puts "#{Company.all.count} companies created"
+
 titles = [
   "CEO",
   "Engineer",
@@ -47,14 +51,6 @@ titles = [
   "Instructor"
 ]
 
-100.times do 
-  Employee.create(
-    name: Faker::Name.name_with_middle,
-    title: titles.sample,
-    company: Company.all.sample
-  )
-end
-
 10.times do 
   random_building = Building.all.sample
   random_building_floors_array = (1..random_building.number_of_floors).to_a
@@ -62,5 +58,21 @@ end
     company: Company.all.sample,
     building: random_building,
     floor: random_building_floors_array.delete(random_building_floors_array.sample)
+    )
+end
+
+puts "#{Office.all.count} offices created"
+
+
+100.times do 
+  company = Company.all.sample
+
+  Employee.create(
+    name: Faker::Name.name_with_middle,
+    title: titles.sample,
+    company: company,
+    office_id: company.id
   )
 end
+
+puts "#{Employee.all.count} employees created"
