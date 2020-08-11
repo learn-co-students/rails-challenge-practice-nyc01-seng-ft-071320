@@ -1,7 +1,12 @@
 class EmployeesController < ApplicationController
   def create
-    @employee = Employee.create(employee_params)
-    redirect_to @employee.company
+    @employee = Employee.new(employee_params)
+
+    if @employee.save
+      redirect_to @employee.company
+    else
+      render :new
+    end
   end
   
   def destroy
