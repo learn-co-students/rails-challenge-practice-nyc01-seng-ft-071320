@@ -1,0 +1,23 @@
+<h1><%= @building.name %></h1>
+<div>
+  <p>Country: <%= @building.country %></p>
+  <p>Address: <%= @building.address %></p>
+</div>
+<div>
+  <p>Companies:</p>
+  <% if @building.companies.empty? %>
+    There is no tenant yet.
+  <% else%>
+    <ul>
+      <% @building.companies.uniq.each do |company| %>
+        <li><%= company.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<div>
+  <p>Rent in Total: <%= number_to_currency(@building.rent_in_total) %></p>
+</div>
+
+<%= link_to ">Edit details", edit_building_path(@building) %>

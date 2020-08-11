@@ -1,0 +1,7 @@
+<h2><%= @company.name %></h2>
+
+<ul>
+  <% @company.offices.each do |office| %>
+    <li><%= office.building.name %>: <%= office.floor %></li>
+  <% end %>
+</ul>

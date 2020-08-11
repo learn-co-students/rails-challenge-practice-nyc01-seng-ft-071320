@@ -1,0 +1,13 @@
+<h1>Buildings</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Available Floor</th>
+  </tr>
+  <% @buildings.each do |building| %>
+  <tr>
+    <td><%= link_to building.name, building_path(building) %></td>
+    <td><%= building.number_of_floors_available %></td>
+  </tr>
+  <% end %>
+</table>
