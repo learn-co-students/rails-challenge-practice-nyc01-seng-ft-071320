@@ -1,4 +1,8 @@
 class Building < ApplicationRecord
+  has_many :offices
+  has_many :companies, through: :offices
+
+  validates :name, :country, :address, :rent_per_floor, :number_of_floors, presence: true
 
   def number_of_floors_available
     # Will not work until relationships and schema are corretly setup
@@ -14,4 +18,13 @@ class Building < ApplicationRecord
     number_of_floors_available.map { |f| offices.build(floor: f) }
   end
 
+  def rent_in_total
+    offices.count * rent_per_floor
+  end
+
+  def num_of_employees
+    offices.inject(0) { |sum, office|
+      sum + office.company.employees.count
+    }
+  end
 end

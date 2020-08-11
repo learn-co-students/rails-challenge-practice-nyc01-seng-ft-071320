@@ -1,0 +1,53 @@
+<h1><%= @company.name %></h1>
+
+<div>
+  <h3>Offices</h3>
+  <% if @company.buildings.empty? %>
+    <p>We don't have offices yet.</p>
+  <% else %>
+    <p>Total Rent: <%= number_to_currency(@company.total_rent_paying) %></p>
+    <% @company.buildings.uniq.each do |building| %>
+      <ul>
+        <li>
+          <p><%= building.name %> - <%= building.address %>, <%= building.country %></p>
+          <ul>
+            <% @company.offices.each do |office| %>
+              <% if building.id == office.building_id %>
+                <li><%= office.floor %> F</li>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
+      </ul>
+    <% end %>
+  <% end %>
+</div>
+
+<div>
+  <h3>Employees</h3>
+  <% if @company.employees.empty? %>
+    <p>We don't have employees yet.</p>
+  <% else %>
+    <ol>
+      <% @company.employees.each do |employee| %>
+        <li>
+          <h4><%= employee.name %> - <%= employee.title %></h4>
+          <p><%= button_to 'Delete', employee_path(employee), method: :delete %></p>
+        </li>
+      <% end %>
+      <li>
+        <h4>Add new employee to this company</h4>
+        <%= form_for @employee do |f| %>
+          <%= f.hidden_field :company_id, value: @company.id %>
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+          
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+
+          <%= f.submit %>
+        <% end %>
+      </li>
+    </ol>
+  <% end %>
+</div>
