@@ -1,0 +1,23 @@
+<h1><%= @company.name %></h1>
+
+    <% @company.offices.each do |o|%>
+        <h4><label>Office at: </label></h4>
+            <p><%= link_to o.building.name, building_path(o) %></p><br>
+
+        <h4><label>Floor: </label><%= o.floor %></h4>
+            
+        
+        <h4>Rent: <%= o.building.rent_per_floor %></h4>
+        
+        <br>
+        <br>
+        <br>
+
+        
+        <label>Employees: </label>
+        
+            <% o.company.employees.each do |e| %>
+                <p><%= e.name %></p>
+            <% end %>
+
+    <% end %>
