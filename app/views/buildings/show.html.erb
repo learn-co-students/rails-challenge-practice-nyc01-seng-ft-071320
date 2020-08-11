@@ -1,0 +1,25 @@
+<h1><%= @building.name %></h1>
+
+<h4><label>Country: </label><%= @building.country %></h4>
+<h4><label>Address: </label><%= @building.address %></h4>
+<h4><label>Rent Per Floor: </label><%= @building.rent_per_floor %></h4>
+<h4><label>Number of Floors: </label><%= @building.number_of_floors %></h4>
+
+<h4><label>Companies: </label></h4>
+    <% @building.companies.each do |c|%>
+        <p><%= link_to c.name, company_path(c) %></p>
+    <% end %>
+<br>
+<br>
+<br>
+<h4>Total Rent: <%= ((@building.number_of_floors - @building.number_of_floors_available.length)*@building.rent_per_floor)%></h4>
+<br>
+<h4>Available Floors(<%=(@building.number_of_floors - @building.companies.length)%>): <%=@building.number_of_floors_available%></h4>
+<br>
+<br>
+<br>
+<h4><%= link_to "Update", edit_building_path(@building)%></h4>
+<br>
+<br>
+<br>
+<%= link_to 'Index Page', buildings_path %>
